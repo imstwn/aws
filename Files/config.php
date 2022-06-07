@@ -22,6 +22,24 @@
 		return $pwd;
 	}
 
+	function getNama($id)
+	{
+		global $conn;
+		$sql = "SELECT name_item FROM item WHERE id_item='$id'";
+		$res = mysqli_query($conn,$sql);
+		$row = mysqli_fetch_assoc($res);
+		return $row['name_item'];
+	}
+
+	function getImage($id)
+	{
+		global $conn;
+		$sql = "SELECT img_item FROM item WHERE id_item='$id'";
+		$res = mysqli_query($conn,$sql);
+		$row = mysqli_fetch_assoc($res);
+		return $row['img_item'];
+	}
+
 
 	if (isset($_POST['registerForm']) && $_POST['registerForm'] == 'register') {
 		$username = $_POST['username'];
@@ -43,21 +61,23 @@
 	if (isset($_POST['loginForm']) && $_POST['loginForm'] == 'login') {
 		$username = $_POST['username'];
 		$password = $_POST['password'];
+
+		echo 'admin';
 		
-		$result = mysqli_query($conn, "SELECT * FROM users WHERE username = '$username'");
-		if (mysqli_num_rows($result) === 1) {
-			$rowUs = mysqli_fetch_assoc($result);
-			if (password_verify($password, $rowUs["password"])) {
-	 			$_SESSION["ID_USER"] = $rowUs["id_user"];
-	 			if ($rowUs['role'] == 2) {
-	 				echo 'user';
-	 			} elseif ($rowUs['role'] == 1) {
-	 				echo 'admin';
-	 			}
-	 		} else {
-	 			echo "wrong";
-	 		}
-		}
+		// $result = mysqli_query($conn, "SELECT * FROM users WHERE username = '$username'");
+		// if (mysqli_num_rows($result) == 1) {
+		// 	$rowUs = mysqli_fetch_assoc($result);
+		// 	if (password_verify($password, $rowUs["password"])) {
+	 // 			$_SESSION["ID_USER"] = $rowUs["id_user"];
+	 // 			if ($rowUs['role'] == 2) {
+	 // 				echo 'user';
+	 // 			} elseif ($rowUs['role'] == 1) {
+	 // 				echo 'admin';
+	 // 			}
+	 // 		} else {
+	 // 			echo "wrong";
+	 // 		}
+		// }
 
 	}
 ?>

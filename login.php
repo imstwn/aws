@@ -97,9 +97,9 @@
 				    	cache: false,
 				    	success: function(data){
 				    		if (data == 'user') {
-				    			window.location.href = 'c/';
+				    			window.location.href = 'c/dashboard.php';
 				    		} else if (data == 'admin') {
-				    			window.location.href = 'admin/';
+				    			window.location.href = 'admin/dashboard.php';
 				    		} else if (data == 'wrong') {
 				    			alert('Username atau Password Salah');
 				    		}
