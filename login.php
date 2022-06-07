@@ -53,20 +53,20 @@
 					<label for="username">Username</label>
 				</div>
 				<div class="form-floating my-2">
-					<input type="password" class="form-control" id="password" placeholder="*******">
-					<label for="password">Password</label>
+					<input type="password" class="form-control" id="password" placeholder="Password" name="passLoginUser">
+                    <label for="password">Password</label>
 				</div>
 				<div class="my-3"></div>
 				<div class="my-3">
 					<div class="row g-2">
 						<div class="col-6">
 							<div class="d-grid">
-                        		<input class="btn btn-outline-primary btn-lg" name="submit" type="submit" id="reg_register" value="Register">
+                        		<input class="btn btn-outline-primary btn-lg" name="reg" type="submit" id="reg_register" value="Register">
                     		</div>
 						</div>
 						<div class="col-6">
 							<div class="d-grid">
-                        		<input class="btn btn-primary btn-lg" name="submit" type="submit" id="login" value="Login">
+                        		<input class="btn btn-primary btn-lg" name="login" type="submit" id="login" value="Login">
                     		</div>
 						</div>
 					</div>
@@ -81,18 +81,22 @@
 				window.location.href = 'register.php';
 			});
 			$('#login').click(function(){
+				
 				var username = $('#username').val();
 				var pass = $('#password').val();
+
+
 				if (username == '' || password == '') {
 					alert('Harap Isikan Username dan/atau password');
-				} else {
+
+				} else if (username !== '' && password !== '') {
 					$.ajax({
 						url: 'Files/config.php',
 						method: 'POST',
 						data: {
 				 			loginForm: 'login',
 				 			username: username,
-				 			password: password
+				 			pass: pass
 				    	},
 				    	cache: false,
 				    	success: function(data){
@@ -109,6 +113,8 @@
 				    	}
 				    });
 				}
+				
+				// }
 			});
 		});
 		

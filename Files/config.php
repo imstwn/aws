@@ -60,24 +60,49 @@
 
 	if (isset($_POST['loginForm']) && $_POST['loginForm'] == 'login') {
 		$username = $_POST['username'];
-		$password = $_POST['password'];
+		$password = $_POST['pass'];
 
-		echo 'admin';
+		$result = mysqli_query($conn, "SELECT * FROM users WHERE username = '$username'");
+		if (mysqli_num_rows($result) == 1) {
+			$rowUs = mysqli_fetch_assoc($result);
+			if (password_verify($password, $rowUs["password"])) {
+	 			$_SESSION["ID_USER"] = $rowUs["id_user"];
+	 			if ($rowUs['role'] == 2) {
+	 				echo 'user';
+	 			} elseif ($rowUs['role'] == 1) {
+	 				echo 'admin';
+	 			}
+	 		} else {
+	 			echo "wrong";
+	 		}
+		}
+
+	}
+
+	if (isset($_POST['pembelian'])) {
+		$a = $_POST['a'];
+		$alamat = $_POST['alamat'];
+		$item = $_POST['item'];
+
+		$ID = $_SESSION["ID_USER"];
 		
-		// $result = mysqli_query($conn, "SELECT * FROM users WHERE username = '$username'");
-		// if (mysqli_num_rows($result) == 1) {
-		// 	$rowUs = mysqli_fetch_assoc($result);
-		// 	if (password_verify($password, $rowUs["password"])) {
-	 // 			$_SESSION["ID_USER"] = $rowUs["id_user"];
-	 // 			if ($rowUs['role'] == 2) {
-	 // 				echo 'user';
-	 // 			} elseif ($rowUs['role'] == 1) {
-	 // 				echo 'admin';
-	 // 			}
-	 // 		} else {
-	 // 			echo "wrong";
-	 // 		}
-		// }
+		$itemsql = "SELECT * FROM item WHERE id_item = '$item'";
 
+		$pr = mysqli_query($conn, $itemsql);
+
+		$row2 = mysqli_fetch_row($pr);
+		$base_pay = $row2[4];
+
+		$total = $base_pay * $amount;
+
+		$transql = "INSERT INTO `transaction` (`id_user`, `id_item`, `amount`, `address`, `total`, date) VALUES ('$ID','$item','$amount','$address','$total', NOW())";
+
+		$end = mysqli_query($conn, $transql);
+		if (!$end) {
+			# code...
+			echo "ok";
+		} else {
+			echo "gagal";
+		}
 	}
 ?>

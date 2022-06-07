@@ -66,7 +66,7 @@
 						</div>
 						<div class="col-6">
 							<div class="d-grid">
-                        		<input class="btn btn-primary btn-lg" name="submit" type="submit" id="reg" value="Register">
+                        		<input class="btn btn-primary btn-lg" name="reg" type="submit" id="reg" value="Register">
                     		</div>
 						</div>
 					</div>
