@@ -1,5 +1,10 @@
 <?php
 
+	if (!isset($_SESSION)) 
+	{ 
+	    session_start(); 
+	} 
+
 	require '../Files/config.php';
 	require '../Files/temp.php';
 
@@ -61,7 +66,7 @@
 
 			if (a != '' && alamat != '') {
 				$.ajax({
-					url: 'Files/config.php',
+					url: '../Files/config.php',
 					method: 'POST',
 					data: {
 						pembelian: 'beli',
@@ -72,6 +77,7 @@
 				   	cache: false,
 				   	success: function(data){
 				   		if (data == 'ok') {
+				   			alert('Pembelian Berhasil');
 				   			window.location.href = 'product.php';
 				   		} else {
 				   			alert('Terjadi Kesalahan');

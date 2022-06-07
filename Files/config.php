@@ -40,6 +40,33 @@
 		return $row['img_item'];
 	}
 
+	function countUsers() {
+		global $conn;
+
+		$sql = "SELECT * FROM users";
+		$result = mysqli_query($conn, $sql);
+		$amount = mysqli_num_rows($result);
+		return $amount;
+	}
+
+	function countItems() {
+		global $conn;
+
+		$sql = "SELECT * FROM item";
+		$result = mysqli_query($conn, $sql);
+		$amount = mysqli_num_rows($result);
+		return $amount;
+	}
+
+	function countTrans() {
+		global $conn;
+
+		$sql = "SELECT * FROM transaction";
+		$result = mysqli_query($conn, $sql);
+		$amount = mysqli_num_rows($result);
+		return $amount;
+	}
+
 
 	if (isset($_POST['registerForm']) && $_POST['registerForm'] == 'register') {
 		$username = $_POST['username'];
@@ -86,19 +113,20 @@
 
 		$ID = $_SESSION["ID_USER"];
 		
-		$itemsql = "SELECT * FROM item WHERE id_item = '$item'";
+		$itemsql = "SELECT * FROM item WHERE code_item = '$item'";
 
 		$pr = mysqli_query($conn, $itemsql);
 
 		$row2 = mysqli_fetch_row($pr);
+		$id_item = $row2[0];
 		$base_pay = $row2[4];
 
-		$total = $base_pay * $amount;
+		$total = $base_pay * $a;
 
-		$transql = "INSERT INTO `transaction` (`id_user`, `id_item`, `amount`, `address`, `total`, date) VALUES ('$ID','$item','$amount','$address','$total', NOW())";
+		$transql = "INSERT INTO `transaction` (`id_user`, `id_item`, `amount`, `address`, `total`, date) VALUES ('$ID','$id_item','$a','$alamat','$total', NOW())";
 
 		$end = mysqli_query($conn, $transql);
-		if (!$end) {
+		if ($end) {
 			# code...
 			echo "ok";
 		} else {

@@ -1,5 +1,10 @@
 <?php
 
+if (!isset($_SESSION)) 
+	{ 
+	    session_start(); 
+	} 
+
 	require '../Files/config.php';
 	require '../Files/temp.php';
 
