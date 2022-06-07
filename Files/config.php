@@ -67,6 +67,24 @@
 		return $amount;
 	}
 
+	function getUsers()
+	{
+		$sql = "SELECT * FROM users";
+		return $sql;
+	}
+
+	function getItems()
+	{
+		$sql = "SELECT * FROM item";
+		return $sql;
+	}
+
+	function getTrans()
+	{
+		$sql = "SELECT * FROM transaction";
+		return $sql;
+	}
+
 
 	if (isset($_POST['registerForm']) && $_POST['registerForm'] == 'register') {
 		$username = $_POST['username'];

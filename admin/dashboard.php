@@ -17,7 +17,8 @@ if (!isset($_SESSION))
 	<title>Dashboard</title>
 </head>
 <body>
-	<div class="container">
+	<script id="theNavbar" src="../Files/nav.js"></script>
+	<div class="container mt-4">
 		<div class="row">
 			<div class="col-md-4">
 					<div class="card text-white bg-success">
