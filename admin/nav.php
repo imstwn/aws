@@ -1,4 +1,15 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<?php 
+  session_start();
+  include '../files/temp.php';
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     <a class="navbar-brand mx-auto" href="#">Admin Page</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,3 +40,7 @@
     </div>
   </div>
 </nav>
+
+
+</body>
+</html>

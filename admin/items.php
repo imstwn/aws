@@ -21,7 +21,7 @@ if (!isset($_SESSION))
 
 	<div class="container mt-4">
 		<div class="text-center">
-			<button class="btn btn-outline-success w-100">Add Item</button>
+			<button class="btn btn-outline-success w-100" data-bs-toggle="modal" data-bs-target="#addItemModal">Add Item</button>
 		</div>
 
 		<div>
@@ -72,8 +72,68 @@ if (!isset($_SESSION))
 			<?php } ?>
 		</table>
 	</div>
-		</div>
 	</div>
+
+
+
+
+		<div class="modal fade" id="addItemModal" tabindex="-1" aria-labelledby="itemModal" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="itemModal">Add Item</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+      		<div class="row g-2">
+      			<div class="col-4">
+      				<div class="form-floating">
+  <input type="text" class="form-control" id="codeItem" placeholder="SP102">
+  <label for="codeItem">Code Item</label>
+</div>
+      			</div>
+      			<div class="col-8">
+      				<div class="form-floating">
+  <input type="text" class="form-control" id="nameItem" placeholder="Samsung">
+  <label for="nameItem">Name Item</label>
+</div>
+      			</div>
+      			<div class="col-12">
+      				<div class="input-group">
+  <label class="input-group-text" for="inputGroupFile01">Upload</label>
+  <input type="file" class="form-control" id="inputGroupFile01">
+</div>
+      			</div>
+      			<div class="col-6">
+      				<div class="form-floating">
+  <input type="text" class="form-control" id="merkItem" placeholder="Merk Item">
+  <label for="merkItem">Merk Item</label>
+</div>
+      			</div>
+      			<div class="col-6">
+      				<div class="form-floating">
+  <input type="text" class="form-control" id="priceItem" placeholder="Price Item">
+  <label for="priceItem">Price Item</label>
+</div>
+      			</div>
+      			<div class="col-12">
+      				<div class="form-floating">
+  <textarea class="form-control" placeholder="Description" id="floatingTextarea2" style="height: 100px"></textarea>
+  <label for="floatingTextarea2">Description</label>
+</div>
+      			</div>
+      		</div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-success">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 </body>
 </html>

@@ -1,1 +1,1 @@
-<?php header('Location : login.php') ?>
+<?php header('Location : https://bosmartphone.web.id/login.php') ?>

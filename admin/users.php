@@ -22,7 +22,7 @@ if (!isset($_SESSION))
 
 	<div class="container mt-4">
 		<div class="text-center">
-			<button class="btn btn-outline-success w-100">Add User</button>
+			<button class="btn btn-outline-success w-100" data-bs-toggle="modal" data-bs-target="#addUserModal">Add User</button>
 		</div>
 
 		<div>
@@ -75,7 +75,30 @@ if (!isset($_SESSION))
 			<?php } ?>
 		</table>
 	</div>
-		</div>
 	</div>
+	<div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="userModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="userModal">Add User</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-floating my-2">
+					<input type="name" class="form-control" id="usernameRegister" placeholder="Username">
+					<label for="usernameRegister">Username</label>
+				</div>
+				<div class="form-floating my-2">
+					<input type="email" class="form-control" id="emailRegister" placeholder="name@example.com">
+					<label for="emailRegister">Email Address</label>
+				</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-success">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 </html>
