@@ -85,6 +85,24 @@
 		return $sql;
 	}
 
+	function sendEmail($email,$name,$password)
+	{
+		$to      = $email; // Send email to our user
+		$subject = 'Login'; // Give the email a subject 
+		$message = '
+		 
+		Thanks for register!
+		Your account has been created, you can login with the following password.
+		 
+		------------------------
+		Username: '.$name.'
+		Password: '.$password.'
+		------------------------
+		 
+		'; // Our message above including the link
+		                     
+		mail($to, $subject, $message); // Send our email
+	}
 
 	if (isset($_POST['registerForm']) && $_POST['registerForm'] == 'register') {
 		$username = $_POST['username'];
@@ -98,6 +116,7 @@
 		} else {
 			$password = password_hash(randomPass(), PASSWORD_DEFAULT);
 			mysqli_query($conn, "INSERT INTO users (username,email,PASSWORD,ROLE) VALUES ('$username','$email','$password','2')");
+			sendEmail($email,$username,$password);
 			echo "goReg";
 		}
 
