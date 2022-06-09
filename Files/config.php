@@ -112,16 +112,6 @@
 		return $sql;
 	}
 
-	function genImage($img)
-	{
-		$img = str_replace('data:image/png;base64,', '', $img);
-		$img = str_replace(' ', '+', $img);
-		$data = base64_decode($img);
-		$file = "images/" . uniqid() . '.png';
-		$success = file_put_contents($file, $data);
-		return $success;
-	}
-
 	function sendEmail($email,$name,$password)
 	{
 		$to      = $email; // Send email to our user
@@ -152,10 +142,10 @@
         <title>Hi, '.getUsername($id).'</title>
     </head>
     <body>
-        <h1>Thanks you for buying smartphone from us!</h1>
-        <h4>Product: '.getNama($id).'</h4>
-        <img width="150px" src="data:image/jpeg;base64,'.base64_encode( $data['img_item'] ).'"/>
-        <h4>Price: '.$base.'. x .'.getJumlah().' = '.$total.'</h4>
+        <h1>Hi, '.getUsername($id).'<br>Thanks you for buying smartphone from us!</h1>
+        <h4>Product: '.getNama($id_item).'</h4>
+        <img width="150px" src="data:image/jpeg;base64,'.base64_encode( getImage($id_item) ).'"/>
+        <h4>Price: '.$base.' x '.getJumlah().' = '.$total.'</h4>
         <h4>Purchasement Time: '.getTime().'</h4>
     </body>
     </html>'; // Our message above including the link
