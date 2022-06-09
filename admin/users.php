@@ -92,7 +92,19 @@ if (!isset($_SESSION))
 					<input type="email" class="form-control" id="emailRegister" placeholder="name@example.com">
 					<label for="emailRegister">Email Address</label>
 				</div>
+				<div class="form-floating my-2">
+					<input type="password" class="form-control" id="loginRegister" placeholder="Password">
+					<label for="loginRegister">Password</label>
+				</div>
+				<div class="form-floating my-2">
+				<select class="form-select" id="userRole">
+					<option value="1">User</option>
+					<option value="0">Admin</option>
+				</select>
+				<label for="userRole">Pilih Role</label>
+			</div>
       </div>
+      
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
         <button type="button" class="btn btn-success">Add</button>

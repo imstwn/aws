@@ -133,7 +133,7 @@
 		Hi, '.getUsername($id).'
 		 
 		You have bought our smartphone from our website!
-		'. echo '<img width="150px" src="data:image/jpeg;base64,'.base64_encode(getImage($id_item)).'"/>' .'
+		'. '<img width="150px" src="data:image/jpeg;base64,'.base64_encode(getImage($id_item)).'"/>' .'
 		
 		 
 		--------------------------------------
