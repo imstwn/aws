@@ -116,13 +116,15 @@
 		Username: '.$name.'
 		Password: '.$password.'
 		------------------------
+
+		You can change password in CHANGE PASSWORD Page.
 		 
 		'; // Our message above including the link
 		                     
 		mail($to, $subject, $message); // Send our email
 	}
 
-	function sendRec($id,$email,$base,$total)
+	function sendRec($id,$id_item,$email,$base,$total)
 	{
 		$to      = $email; // Send email to our user
 		$subject = 'Thank You for Your Purchasement'; // Give the email a subject 
@@ -131,13 +133,13 @@
 		Hi, '.getUsername($id).'
 		 
 		You have bought our smartphone from our website!
-		'.base64_encode( getImage($id) ).'
+		'. echo '<img width="150px" src="data:image/jpeg;base64,'.base64_encode(getImage($id_item)).'"/>' .'
 		
 		 
 		--------------------------------------
-		Product: '.getNama($id).'
+		Product: '.getNama($id_item).'
 		Price: '.$base.' x '.$total.' = '.$base*$total.'
-		Purchasement Time: '.getTime().'
+		Purchasement Time: '.getTime($id_item).'
 		--------------------------------------
 
 		 
@@ -209,7 +211,7 @@
 		$end = mysqli_query($conn, $transql);
 		
 			
-			sendRec($id_item,$_SESSION["EMAIL"],$base_pay,$total);
+			sendRec($ID,$id_item,$_SESSION["EMAIL"],$base_pay,$total);
 			
 		echo 'ok';
 	}

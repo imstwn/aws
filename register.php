@@ -12,9 +12,10 @@
 	<title>Register</title>
 </head>
 <body>
+<div class="container px-4">
 	<div class="row mt-5">
-		<div class="col-4"></div>
-		<div class="col-4 mt-3">
+		<div class="col"></div>
+		<div class="col-lg-5 col-md-6 col-sm-12 mt-3">
 			<div class="card shadow bg-body rounded p-5">
 				<div class="h3 text-center">
 					Register New Account
@@ -73,8 +74,9 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-4"></div>
+		<div class="col"></div>
 	</div>
+</div>
 
 	<script>
 		$(document).ready(function(){
