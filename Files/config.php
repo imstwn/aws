@@ -49,6 +49,15 @@
 		return $row['img_item'];
 	}
 
+	function getJumlah($id)
+	{
+		global $conn;
+		$sql = "SELECT amount FROM item WHERE id_item='$id'";
+		$res = mysqli_query($conn,$sql);
+		$row = mysqli_fetch_assoc($res);
+		return $row['amount'];
+	}
+
 	function getTime()
 	{
 		global $conn;
@@ -133,12 +142,12 @@
 		Hi, '.getUsername($id).'
 		 
 		You have bought our smartphone from our website!
-		'. '<img width="150px" src="data:image/jpeg;base64,'.base64_encode(getImage($id_item)).'"/>' .'
+		'.getImage($id_item)) .'
 		
 		 
 		--------------------------------------
 		Product: '.getNama($id_item).'
-		Price: '.$base.' x '.$total.' = '.$base*$total.'
+		Price: '.$base.' x '.getJumlah($id).' = '.$total.'
 		Purchasement Time: '.getTime($id_item).'
 		--------------------------------------
 
