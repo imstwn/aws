@@ -93,8 +93,8 @@ if (!isset($_SESSION))
 					<label for="emailRegister">Email Address</label>
 				</div>
 				<div class="form-floating my-2">
-					<input type="password" class="form-control" id="loginRegister" placeholder="Password">
-					<label for="loginRegister">Password</label>
+					<input type="password" class="form-control" id="passRegister" placeholder="Password">
+					<label for="passRegister">Password</label>
 				</div>
 				<div class="form-floating my-2">
 				<select class="form-select" id="userRole">
@@ -107,7 +107,7 @@ if (!isset($_SESSION))
       
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-success">Add</button>
+        <button type="button" class="btn btn-success" id="addNow">Add</button>
       </div>
     </div>
   </div>
@@ -116,7 +116,14 @@ if (!isset($_SESSION))
 	<script>
 		$(document).ready(function(){
 			$('#addUser').click(function(){
-				console.log('click');
+				
+				$('#addNow').click(function(){
+					var uname = $('#usernameRegister').val();
+				var email = $('#emailRegister').val();
+				var pass = $('#passRegister').val();
+				var role = $('#userRole').val();
+					
+				});
 			});
 		});
 	</script>

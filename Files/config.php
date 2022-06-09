@@ -49,10 +49,10 @@
 		return $row['img_item'];
 	}
 
-	function getJumlah($id)
+	function getJumlah()
 	{
 		global $conn;
-		$sql = "SELECT amount FROM item WHERE id_item='$id'";
+		$sql = "SELECT amount FROM transaction WHERE id_tr=LAST_INSERT_ID()";
 		$res = mysqli_query($conn,$sql);
 		$row = mysqli_fetch_assoc($res);
 		return $row['amount'];
@@ -112,10 +112,20 @@
 		return $sql;
 	}
 
+	function genImage($img)
+	{
+		$img = str_replace('data:image/png;base64,', '', $img);
+		$img = str_replace(' ', '+', $img);
+		$data = base64_decode($img);
+		$file = "images/" . uniqid() . '.png';
+		$success = file_put_contents($file, $data);
+		return $success;
+	}
+
 	function sendEmail($email,$name,$password)
 	{
 		$to      = $email; // Send email to our user
-		$subject = 'Login'; // Give the email a subject 
+		$subject = 'Account Created'; // Give the email a subject 
 		$message = '
 		 
 		Thanks for register!
@@ -142,12 +152,13 @@
 		Hi, '.getUsername($id).'
 		 
 		You have bought our smartphone from our website!
-		'.getImage($id_item)) .'
+		'.
+		genImage(getImage($id_item)) .'
 		
 		 
 		--------------------------------------
 		Product: '.getNama($id_item).'
-		Price: '.$base.' x '.getJumlah($id_item).' = '.$total.'
+		Price: '.$base.' x '.getJumlah().' = '.$total.'
 		Purchasement Time: '.getTime($id_item).'
 		--------------------------------------
 

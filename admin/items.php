@@ -132,7 +132,7 @@ if (!isset($_SESSION))
 <script>
 	$(document).ready(function(){
 		$('#addItemBtn').click(function(){
-			console.log('click');
+			
 		});
 	});
 </script>
