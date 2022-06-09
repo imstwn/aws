@@ -31,6 +31,15 @@
 		return $row['name_item'];
 	}
 
+	function getUsername($id)
+	{
+		global $conn;
+		$sql = "SELECT username FROM users WHERE id_user='$id'";
+		$res = mysqli_query($conn,$sql);
+		$row = mysqli_fetch_assoc($res);
+		return $row['username'];
+	}
+
 	function getImage($id)
 	{
 		global $conn;
@@ -118,6 +127,8 @@
 		$to      = $email; // Send email to our user
 		$subject = 'Thank You for Your Purchasement'; // Give the email a subject 
 		$message = '
+
+		Hi, '.getUsername($id).'
 		 
 		You have bought our smartphone from our website!
 		'.base64_encode( getImage($id) ).'
