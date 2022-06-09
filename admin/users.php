@@ -110,14 +110,12 @@ if (!isset($_SESSION))
 			$('#addUser').click(function(){
 				
 				$('#addNow').click(function(){
-					var uname = $('#usernameRegister').val();
 				var email = $('#emailRegister').val();
-				var pass = $('#passRegister').val();
 				var role = $('#userRole').val();
-					if (username != '' && email != '' && pass != '') {
+					if (email != '') {
 						$.ajax({
 							type: "POST",
-							url: "../files/req.php",
+							url: "../Files/config.php",
 							data: {
 								addUser: 'new',
 								email: email,

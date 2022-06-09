@@ -7,7 +7,27 @@ if (!isset($_SESSION))
 
 	require '../Files/config.php';
 	require '../Files/temp.php';
+if(isset($_POST['addItemBtn'])) {
+    if (!empty($_POST['nama']) && !empty($_POST['code'])) {
+    	# code...
+    	$image = addslashes(file_get_contents($_FILES['image']['tmp_name'])); //SQL Injection defence!
+    	$code = $_POST["code"];
+   		$name = $_POST["nama"];
+    	$price = $_POST["price"];
+    	$desc = $_POST["desc"];
+    	$merk = $_POST["merk"];
 
+    	$query = "INSERT INTO `item`(`code_item`, `name_item`, `img_item`, `price_item`, `desc_item`, `merk_item`) VALUES ('$code','$name','$image','$price','$desc','$merk')";
+    	$res = mysqli_query($conn, $query);
+
+    	if (!$res) { // Error handling
+    	echo "<script>alert('Failed');</script>";
+    	} else {
+	    	# code...
+	    	echo "<script>alert('Successfully Added');</script>";
+	    }
+	}
+}
 ?>
 
 <!DOCTYPE html>
@@ -80,44 +100,46 @@ if (!isset($_SESSION))
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-
+<form method="post" action="" enctype="multipart/form-data">
       		<div class="row g-2">
-      			<div class="col-4">
+      			
+      				<div class="col-4">
       				<div class="form-floating">
-  <input type="text" class="form-control" id="codeItem" placeholder="SP102">
-  <label for="codeItem">Code Item</label>
+  <input type="text" class="form-control" id="code" name="code" placeholder="SP102">
+  <label for="code">Code Item</label>
 </div>
       			</div>
       			<div class="col-8">
       				<div class="form-floating">
-  <input type="text" class="form-control" id="nameItem" placeholder="Samsung">
-  <label for="nameItem">Name Item</label>
+  <input type="text" class="form-control" id="nama" name="nama" placeholder="Samsung">
+  <label for="nama">Name Item</label>
 </div>
       			</div>
       			<div class="col-12">
       				<div class="input-group">
-  <label class="input-group-text" for="inputGroupFile01">Upload</label>
-  <input type="file" class="form-control" id="inputGroupFile01">
+  <label class="input-group-text" for="image">Upload</label>
+  <input type="file" class="form-control" name="image" id="image">
 </div>
       			</div>
       			<div class="col-6">
       				<div class="form-floating">
-  <input type="text" class="form-control" id="merkItem" placeholder="Merk Item">
-  <label for="merkItem">Merk Item</label>
+  <input type="text" class="form-control" id="merk" name="merk" placeholder="Merk Item">
+  <label for="merk">Merk Item</label>
 </div>
       			</div>
       			<div class="col-6">
       				<div class="form-floating">
-  <input type="text" class="form-control" id="priceItem" placeholder="Price Item">
-  <label for="priceItem">Price Item</label>
+  <input type="number" class="form-control" id="price" name="price" placeholder="Price Item">
+  <label for="price">Price Item</label>
 </div>
       			</div>
       			<div class="col-12">
       				<div class="form-floating">
-  <textarea class="form-control" placeholder="Description" id="floatingTextarea2" style="height: 100px"></textarea>
-  <label for="floatingTextarea2">Description</label>
+  <textarea class="form-control" placeholder="Description" id="desc" name="desc" style="height: 100px"></textarea>
+  <label for="desc">Description</label>
 </div>
       			</div>
+      			</form>
       		</div>
 
       </div>
@@ -129,13 +151,6 @@ if (!isset($_SESSION))
   </div>
 </div>
 
-<script>
-	$(document).ready(function(){
-		$('#addItemBtn').click(function(){
-			
-		});
-	});
-</script>
 
 </body>
 </html>
