@@ -84,17 +84,9 @@ if (!isset($_SESSION))
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <div class="form-floating my-2">
-					<input type="name" class="form-control" id="usernameRegister" placeholder="Username">
-					<label for="usernameRegister">Username</label>
-				</div>
 				<div class="form-floating my-2">
 					<input type="email" class="form-control" id="emailRegister" placeholder="name@example.com">
 					<label for="emailRegister">Email Address</label>
-				</div>
-				<div class="form-floating my-2">
-					<input type="password" class="form-control" id="passRegister" placeholder="Password">
-					<label for="passRegister">Password</label>
 				</div>
 				<div class="form-floating my-2">
 				<select class="form-select" id="userRole">
@@ -122,7 +114,25 @@ if (!isset($_SESSION))
 				var email = $('#emailRegister').val();
 				var pass = $('#passRegister').val();
 				var role = $('#userRole').val();
-					
+					if (username != '' && email != '' && pass != '') {
+						$.ajax({
+							type: "POST",
+							url: "../files/req.php",
+							data: {
+								addUser: 'new',
+								email: email,
+								role: role
+							},cache: false,
+				   	success: function(data){
+				   			alert(data);
+				   					
+				  		
+				   	},
+				   	error: function(xhr, status, error) {
+				   		console.error(xhr);
+				   	}
+						});
+					}
 				});
 			});
 		});

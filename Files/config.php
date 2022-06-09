@@ -135,6 +135,8 @@
 
 	function sendRec($id,$id_item,$email,$base,$total)
 	{
+		$result = mysqli_query($conn, "SELECT * FROM item WHERE id_item = '$id_item'");
+		$rowUs = mysqli_fetch_assoc($result);
 		$to      = $email; // Send email to our user
 		$subject = 'Thank You for Your Purchasement'; // Give the email a subject 
 		$message = '<html>
@@ -144,7 +146,7 @@
     <body>
         <h1>Hi, '.getUsername($id).'<br>Thanks you for buying smartphone from us!</h1>
         <h4>Product: '.getNama($id_item).'</h4>
-        <img width="150px" src="data:image/jpeg;base64,'.base64_encode( getImage($id_item) ).'"/>
+        <img width="150px" src="data:image/jpeg;base64,'.base64_encode($rowUs['img_item']).'"/>
         <h4>Price: '.$base.' x '.getJumlah().' = '.$total.'</h4>
         <h4>Purchasement Time: '.getTime().'</h4>
     </body>
@@ -243,5 +245,18 @@
 				}
 			} 
 		// }
+	}
+
+	if (isset($_POST['addUser'])) {
+		$email = $_POST['email'];
+		$role = $_POST['role'];
+		$us = randomPass();
+		$ps = randomPass();
+
+		$password = password_hash($ps, PASSWORD_DEFAULT);
+		mysqli_query($conn, "INSERT INTO users (username,email,PASSWORD,ROLE) VALUES ('$us','$email','$password','$role')");
+		sendEmail($email,$us,$ps);
+		echo "goReg";
+
 	}
 ?>

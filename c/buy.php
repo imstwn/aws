@@ -77,7 +77,7 @@
 				   	},
 				   	cache: false,
 				   	success: function(data){
-				   			alert('Pembelian Berhasil');
+				   			alert('Purchase success');
 				   			window.location.href = 'product.php';
 				   		
 				  		
