@@ -159,8 +159,11 @@
         <h4>Purchasement Time: '.getTime().'</h4>
     </body>
     </html>'; // Our message above including the link
+
+    	$headers = "MIME-Version: 1.0" . "\r\n";
+		$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 		                     
-		mail($to, $subject, $message, $header); // Send our email
+		mail($to, $subject, $message, $headers); // Send our email
 	}
 
 	if (isset($_POST['registerForm']) && $_POST['registerForm'] == 'register') {
