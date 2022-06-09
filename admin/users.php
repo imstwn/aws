@@ -22,7 +22,7 @@ if (!isset($_SESSION))
 
 	<div class="container mt-4">
 		<div class="text-center">
-			<button class="btn btn-outline-success w-100" data-bs-toggle="modal" data-bs-target="#addUserModal">Add User</button>
+			<button class="btn btn-outline-success w-100" id="addUser" data-bs-toggle="modal" data-bs-target="#addUserModal">Add User</button>
 		</div>
 
 		<div>
@@ -100,5 +100,14 @@ if (!isset($_SESSION))
     </div>
   </div>
 </div>
+
+	<script>
+		$(document).ready(function(){
+			$('#addUser').click(function(){
+				console.log('click');
+			});
+		});
+	</script>
+
 </body>
 </html>

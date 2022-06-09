@@ -76,12 +76,10 @@
 				   	},
 				   	cache: false,
 				   	success: function(data){
-				   		if (data == 'ok') {
 				   			alert('Pembelian Berhasil');
 				   			window.location.href = 'product.php';
-				   		} else {
-				   			alert('Terjadi Kesalahan');
-				  		}
+				   		
+				  		
 				   	},
 				   	error: function(xhr, status, error) {
 				   		console.error(xhr);

@@ -128,12 +128,19 @@ if (!isset($_SESSION))
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-success">Add</button>
+        <button type="button" class="btn btn-success" id="addItemBtn">Add</button>
       </div>
     </div>
   </div>
 </div>
 
+<script>
+	$(document).ready(function(){
+		$('#addItemBtn').click(function(){
+			console.log('click');
+		});
+	});
+</script>
 
 </body>
 </html>

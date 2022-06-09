@@ -1,6 +1,7 @@
 <?php 
   session_start();
-  include '../files/temp.php';
+  require '../Files/config.php';
+  require '../Files/temp.php';
 ?>
 
 <!DOCTYPE html>
@@ -30,14 +31,51 @@
         <li class="nav-item">
           <a class="nav-link active" href="transaction.php">Transaction</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="../logout.php">Logout</a>
-        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" href="#" id="navbarChangePass" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-person-fill"></i>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarChangePass">
+              <li><a class="dropdown-item" href="change-password.php">Change Password</a></li>
+              <li><a class="dropdown-item" href="../logout.php">Logout</a></li>
+            </ul>
+          </li>
+
       </ul>
     </div>
   </div>
 </nav>
 
+<div class="modal fade" id="changePassModal" tabindex="-1" aria-labelledby="changePass" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="changePass">Change Password</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-floating">
+  <input type="password" class="form-control" id="oldPass" placeholder="Current Password">
+  <label for="oldPass">Current Password</label>
+</div>
+
+<div class="form-floating mt-4">
+  <input type="password" class="form-control" id="newPass1" placeholder="New Password">
+  <label for="newPass1">New Password</label>
+</div>
+
+<div class="form-floating mt-4">
+  <input type="password" class="form-control" id="newPass2" placeholder="New Password Confirm">
+  <label for="newPass2">New Password Confirm</label>
+</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-success">Change Password</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>

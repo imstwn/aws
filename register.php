@@ -1,7 +1,7 @@
 <?php
 
 	require 'Files/config.php';
-	require 'Files/temp.php';
+	include 'Files/temp.php';
 
 ?>
 

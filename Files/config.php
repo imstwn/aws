@@ -40,6 +40,15 @@
 		return $row['img_item'];
 	}
 
+	function getTime()
+	{
+		global $conn;
+		$sql = "SELECT date FROM transaction WHERE id_tr=LAST_INSERT_ID()";
+		$res = mysqli_query($conn,$sql);
+		$row = mysqli_fetch_assoc($res);
+		return $row['date'];
+	}
+
 	function countUsers() {
 		global $conn;
 
@@ -104,6 +113,28 @@
 		mail($to, $subject, $message); // Send our email
 	}
 
+	function sendRec($id,$email,$base,$total)
+	{
+		$to      = $email; // Send email to our user
+		$subject = 'Thank You for Your Purchasement'; // Give the email a subject 
+		$message = '
+		 
+		You have bought our smartphone from our website!
+		'.base64_encode( getImage($id) ).'
+		
+		 
+		--------------------------------------
+		Product: '.getNama($id).'
+		Price: '.$base.' x '.$total.' = '.$base*$total.'
+		Purchasement Time: '.getTime().'
+		--------------------------------------
+
+		 
+		'; // Our message above including the link
+		                     
+		mail($to, $subject, $message); // Send our email
+	}
+
 	if (isset($_POST['registerForm']) && $_POST['registerForm'] == 'register') {
 		$username = $_POST['username'];
 		$email = $_POST['email'];
@@ -114,9 +145,10 @@
 		} elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 			echo "emailFormat";
 		} else {
-			$password = password_hash(randomPass(), PASSWORD_DEFAULT);
+			$pass = randomPass();
+			$password = password_hash($pass, PASSWORD_DEFAULT);
 			mysqli_query($conn, "INSERT INTO users (username,email,PASSWORD,ROLE) VALUES ('$username','$email','$password','2')");
-			sendEmail($email,$username,$password);
+			sendEmail($email,$username,$pass);
 			echo "goReg";
 		}
 
@@ -131,6 +163,7 @@
 			$rowUs = mysqli_fetch_assoc($result);
 			if (password_verify($password, $rowUs["password"])) {
 	 			$_SESSION["ID_USER"] = $rowUs["id_user"];
+	 			$_SESSION["EMAIL"] = $rowUs["email"];
 	 			if ($rowUs['role'] == 2) {
 	 				echo 'user';
 	 			} elseif ($rowUs['role'] == 1) {
@@ -163,11 +196,31 @@
 		$transql = "INSERT INTO `transaction` (`id_user`, `id_item`, `amount`, `address`, `total`, date) VALUES ('$ID','$id_item','$a','$alamat','$total', NOW())";
 
 		$end = mysqli_query($conn, $transql);
-		if ($end) {
-			# code...
-			echo "ok";
-		} else {
-			echo "gagal";
-		}
+		
+			
+			sendRec($id_item,$_SESSION["EMAIL"],$base_pay,$total);
+			
+		echo 'ok';
+	}
+
+	if (isset($_POST['editPassword'])) {
+		// if ($_POST['editPassword'] == 'editPass') {
+				$oldPass = $_POST['oldPass'];
+				$newPass = $_POST['newPass'];
+				$id = $_SESSION["ID_USER"];
+
+			$res = mysqli_query($conn,"SELECT password FROM users WHERE id_user='$id'");
+			$row = mysqli_fetch_assoc($res);
+			if (password_verify($oldPass,$row['password'])) {
+				$ps = password_hash($newPass, PASSWORD_DEFAULT);
+				
+				$result = mysqli_query($conn,"UPDATE users SET password='$ps' WHERE id_user='$id'");
+				if ($result) {
+						echo 'ok';
+				} else {
+				echo "notok";
+				}
+			} 
+		// }
 	}
 ?>
