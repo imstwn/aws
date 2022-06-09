@@ -147,7 +147,7 @@
 		 
 		--------------------------------------
 		Product: '.getNama($id_item).'
-		Price: '.$base.' x '.getJumlah($id).' = '.$total.'
+		Price: '.$base.' x '.getJumlah($id_item).' = '.$total.'
 		Purchasement Time: '.getTime($id_item).'
 		--------------------------------------
 
