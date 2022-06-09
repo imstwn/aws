@@ -147,25 +147,20 @@
 	{
 		$to      = $email; // Send email to our user
 		$subject = 'Thank You for Your Purchasement'; // Give the email a subject 
-		$message = '
-
-		Hi, '.getUsername($id).'
-		 
-		You have bought our smartphone from our website!
-		'.
-		genImage(getImage($id_item)) .'
-		
-		 
-		--------------------------------------
-		Product: '.getNama($id_item).'
-		Price: '.$base.' x '.getJumlah().' = '.$total.'
-		Purchasement Time: '.getTime($id_item).'
-		--------------------------------------
-
-		 
-		'; // Our message above including the link
+		$message = '<html>
+    <head>
+        <title>Hi, '.getUsername($id).'</title>
+    </head>
+    <body>
+        <h1>Thanks you for buying smartphone from us!</h1>
+        <h4>Product: '.getNama($id).'</h4>
+        <img width="150px" src="data:image/jpeg;base64,'.base64_encode( $data['img_item'] ).'"/>
+        <h4>Price: '.$base.'. x .'.getJumlah().' = '.$total.'</h4>
+        <h4>Purchasement Time: '.getTime().'</h4>
+    </body>
+    </html>'; // Our message above including the link
 		                     
-		mail($to, $subject, $message); // Send our email
+		mail($to, $subject, $message, $header); // Send our email
 	}
 
 	if (isset($_POST['registerForm']) && $_POST['registerForm'] == 'register') {
