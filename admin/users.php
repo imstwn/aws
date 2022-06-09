@@ -124,8 +124,8 @@ if (!isset($_SESSION))
 								role: role
 							},cache: false,
 				   	success: function(data){
-				   			alert(data);
-				   					
+				   			alert('Add User Success');
+				   			window.location.reload();   		
 				  		
 				   	},
 				   	error: function(xhr, status, error) {
