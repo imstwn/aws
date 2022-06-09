@@ -15,7 +15,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>Purchasement</title>
-	//<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 <body>
 	<script id="theNavbar" src="../Files/nav.js"></script>
