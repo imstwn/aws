@@ -144,7 +144,7 @@
         <title>Hi, '.getUsername($id).'</title>
     </head>
     <body>
-        <h1>Hi, '.getUsername($id).'<br>Thanks you for buying smartphone from us!</h1>
+        <h1>Hi, '.getUsername($id).'<br>Thank you for buying smartphone from us!</h1>
         <h4>Product: '.getNama($id_item).'</h4>
         <img width="150px" src="data:image/jpeg;base64,'.base64_encode($rowUs['img_item']).'"/>
         <h4>Price: '.$base.' x '.getJumlah().' = '.$total.'</h4>
@@ -258,5 +258,79 @@
 		sendEmail($email,$us,$ps);
 		echo "goReg";
 
+	}
+
+	if (isset($_POST['seeItemNow'])) {
+		$idItem = $_POST['idItem'];
+
+		echo getItemCode($idItem).','.getItemName($idItem).','.getItemPrice($idItem).','.getItemMerk($idItem).','.getItemDesc($idItem);
+	}
+
+	if (isset($_POST['seeImageNow'])) {
+		$idItem = $_POST['idItem'];
+
+		echo '<img width="200px" src="data:image/jpeg;base64,'.base64_encode(getItemImg($idItem)).'"/>';
+	}
+
+	if (isset($_POST['deleteItem'])	) {
+		$idItem = $_POST['idItem'];
+		$res = mysqli_query($conn,"DELETE FROM item WHERE id_item='$idItem'");
+		if ($res) {
+				echo 'ok';
+			}
+	}
+
+	function getItemCode($id)
+	{
+		global $conn;
+		$sql = "SELECT code_item FROM item WHERE id_item=$id";;
+		$res = mysqli_query($conn,$sql);
+		$row = mysqli_fetch_assoc($res);
+		return $row['code_item'];
+	}
+
+	function getItemImg($id)
+	{
+		global $conn;
+		$sql = "SELECT img_item FROM item WHERE id_item=$id";;
+		$res = mysqli_query($conn,$sql);
+		$row = mysqli_fetch_assoc($res);
+		return $row['img_item'];
+	}
+
+	function getItemName($id)
+	{
+		global $conn;
+		$sql = "SELECT name_item FROM item WHERE id_item=$id";;
+		$res = mysqli_query($conn,$sql);
+		$row = mysqli_fetch_assoc($res);
+		return $row['name_item'];
+	}
+
+	function getItemPrice($id)
+	{
+		global $conn;
+		$sql = "SELECT price_item FROM item WHERE id_item=$id";;
+		$res = mysqli_query($conn,$sql);
+		$row = mysqli_fetch_assoc($res);
+		return $row['price_item'];
+	}
+
+	function getItemDesc($id)
+	{
+		global $conn;
+		$sql = "SELECT desc_item FROM item WHERE id_item=$id";;
+		$res = mysqli_query($conn,$sql);
+		$row = mysqli_fetch_assoc($res);
+		return $row['desc_item'];
+	}
+
+	function getItemMerk($id)
+	{
+		global $conn;
+		$sql = "SELECT merk_item FROM item WHERE id_item=$id";;
+		$res = mysqli_query($conn,$sql);
+		$row = mysqli_fetch_assoc($res);
+		return $row['merk_item'];
 	}
 ?>
