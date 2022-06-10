@@ -333,4 +333,111 @@
 		$row = mysqli_fetch_assoc($res);
 		return $row['merk_item'];
 	}
+
+	if (isset($_POST['deleteUser'])	) {
+		$idUser = $_POST['idUser'];
+		$res = mysqli_query($conn,"DELETE FROM users WHERE id_user='$idUser'");
+		if ($res) {
+				echo 'ok';
+			}
+	}
+
+	if (isset($_POST['seeUserAcc'])) {
+		$idUser = $_POST['idUser'];
+
+		echo getUsernameUser($idUser).','.getEmailUser($idUser).','.getPasswordUser($idUser).','.getRoleUser($idUser);
+	}
+
+	function getUsernameUser($id)
+	{
+		global $conn;
+		$sql = "SELECT username FROM users WHERE id_user=$id";;
+		$res = mysqli_query($conn,$sql);
+		$row = mysqli_fetch_assoc($res);
+		return $row['username'];
+	}
+
+	function getEmailUser($id)
+	{
+		global $conn;
+		$sql = "SELECT email FROM users WHERE id_user=$id";;
+		$res = mysqli_query($conn,$sql);
+		$row = mysqli_fetch_assoc($res);
+		return $row['email'];
+	}
+
+	function getPasswordUser($id)
+	{
+		global $conn;
+		$sql = "SELECT password FROM users WHERE id_user=$id";;
+		$res = mysqli_query($conn,$sql);
+		$row = mysqli_fetch_assoc($res);
+		return $row['password'];
+	}
+
+	function getRoleUser($id)
+	{
+		global $conn;
+		$sql = "SELECT role FROM users WHERE id_user=$id";;
+		$res = mysqli_query($conn,$sql);
+		$row = mysqli_fetch_assoc($res);
+		return $row['role'];
+	}
+
+	if (isset($_POST['updateItem'])) {
+		$idItem = $_POST['idItem'];
+		$codeItem = $_POST['codeItem'];
+		$namaItem = $_POST['namaItem'];
+		$priceItem = $_POST['priceItem'];
+		$merkItem = $_POST['merkItem'];
+		$descItem = $_POST['descItem'];
+
+		$sql = "UPDATE item SET code_item='$codeItem' ,name_item='$namaItem' ,price_item='$priceItem' ,desc_item='$descItem' ,merk_item='$merkItem' WHERE id_item='$idItem'";
+		$res = mysqli_query($conn,$sql);
+		if ($res) {
+			echo "ok";
+		} else {
+			echo 'Failed';
+		}
+		
+	}
+
+	if (isset($_POST['updateUser'])) {
+		$idUser = $_POST['idUser'];
+		$usernameUser = $_POST['usernameUser'];
+		$emailUser = $_POST['emailUser'];
+		$passwordUser = password_hash($_POST['passwordUser'], PASSWORD_DEFAULT);
+		$roleUser = $_POST['roleUser'];
+
+		$sql = "UPDATE users SET username='$usernameUser' , email='$emailUser' , PASSWORD='$passwordUser', ROLE='$roleUser' WHERE id_user='$idUser'";
+		$res = mysqli_query($conn,$sql);
+		if ($res) {
+			echo "ok";
+		} else {
+			echo 'Failed';
+		}
+	}
+
+	if (isset($_POST['usn'])) {
+		echo getUsernameUser($_SESSION['ID_USER']);
+	}
+
+	if (isset($_POST['editUsername'])) {
+
+		$id = $_SESSION["ID_USER"];
+		$newUn = $_POST['newUn'];
+		
+		$count = mysqli_query($conn,"SELECT COUNT(username) FROM users WHERE id_user='$id'");
+		if ($count != 1) {
+			$sql = "UPDATE users SET username='$newUn' WHERE id_user='$id'";
+			$res = mysqli_query($conn,$sql);
+			if ($res) {
+				echo "ok";
+			} else {
+				echo 'Failed';
+			}
+		} else {
+			echo 'Username is Already Exist';
+		}
+	}
 ?>

@@ -36,6 +36,7 @@
             <i class="bi bi-person-fill"></i>
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarChangePass">
+              <li><a class="dropdown-item" href="change-username.php">Change Username</a></li>
               <li><a class="dropdown-item" href="change-password.php">Change Password</a></li>
               <li><a class="dropdown-item" href="../logout.php">Logout</a></li>
             </ul>

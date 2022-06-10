@@ -99,7 +99,7 @@ if (!isset($_SESSION))
       			</div>
       			<div class="col-6">
       				<div class="form-floating">
-  <input type="number" class="form-control" id="pricIteme" placeholder="Price Item">
+  <input type="number" class="form-control" id="priceItem" placeholder="Price Item">
   <label for="price">Price Item</label>
 </div>
       			</div>
@@ -163,7 +163,7 @@ if (!isset($_SESSION))
 				    		$('#seeItem').html(det[1]);
 				    		$('#codeItem').val(det[0]);
 				    		$('#namaItem').val(det[1]);
-				    		$('#pricIteme').val(det[2]);
+				    		$('#priceItem').val(det[2]);
 				    		$('#merkItem').val(det[3]);
 				    		$('#descItem').val(det[4]);
 				    		
@@ -184,19 +184,54 @@ if (!isset($_SESSION))
 				 			idItem: idItem
 					    	},
 					    	cache: false,
+					    	success: function(data){
+				   					$('#theImg').html(data); 		
+				  		
+				   			}	,	
 					    	error: function(xhr, status, error) {
 					    		console.error(xhr);
 					    	}
-					    }).done(function(data){
-					    	$('#theImg').html(data);
 					    });
 
 					    $('#backItem').click(function(){
-					$('#theImg').html('.');
-				});
+								$('#theImg').html('');
+							});
 				});
 
+				$('#setItem').click(function(){
+								var codeItem = $('#codeItem').val();
+				    		var namaItem = $('#namaItem').val();
+				    		var priceItem = $('#priceItem').val();
+				    		var merkItem = $('#merkItem').val();
+				    		var descItem = $('#descItem').val();	
 
+				    		$.ajax({
+									url: '../Files/config.php',
+									method: 'POST',
+									data: {
+										idItem: idItem,
+					 					updateItem: 'update',
+										codeItem: codeItem,
+										namaItem: namaItem,
+										priceItem: priceItem,
+										merkItem: merkItem,
+										descItem: descItem
+				 						
+					    				},
+					    				cache: false,
+					    				success: function(data){
+				   								if (data == 'ok') {
+				   									alert('Updated');
+				   								}	else {
+				   									alert(data);
+				   								}
+				  		
+				   						}	,	
+					    				error: function(xhr, status, error) {
+					    					console.error(xhr);
+					    				}
+					   			 });
+				});
 			});
 
 	$('#tableItems').on('click','#decBtn', function(){
