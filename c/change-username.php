@@ -52,7 +52,7 @@
 				event.preventDefault();
 				var newUn = $('#newUsername').val();
 
-				if (currUn != '' && newUn != '') {
+				if (newUn != '') {
 						$.ajax({
 	                        type: 'POST',
 	                        url: '../Files/config.php',
@@ -61,11 +61,13 @@
 								newUn: newUn
 	                        }
 	                    }).done(function(data){
-
 	                    	if (data == 'ok') {
-	                    		alert('Password Changed');
-		                        $("#newUsername").val('');
-	                    	} 
+	                    		alert('Username Changed');
+		                        location.reload();
+
+	                    	} else {
+	                    		alert(data);
+	                    	}
 	                    	
 	                    });
 				} else {

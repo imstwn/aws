@@ -428,13 +428,13 @@
 		$newUn = $_POST['newUn'];
 		
 		$count = mysqli_query($conn,"SELECT COUNT(username) FROM users WHERE id_user='$id'");
-		if ($count != 1) {
+		if (mysqli_num_rows($count) != 0) {
 			$sql = "UPDATE users SET username='$newUn' WHERE id_user='$id'";
 			$res = mysqli_query($conn,$sql);
 			if ($res) {
 				echo "ok";
 			} else {
-				echo 'Failed';
+				echo 'Failed, Username is Already Exist';
 			}
 		} else {
 			echo 'Username is Already Exist';
